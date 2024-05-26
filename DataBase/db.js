@@ -1,10 +1,16 @@
 import sql from "mssql";
+import dotenv from 'dotenv'
 
+dotenv.config();
 const sqlConfig = {
     user: "sa",
     password: "Prince@123",
     server: "Prince365",
     database: "KGK",
+    // user:process.env.user,
+    // password:process.env.password,
+    // server:process.env.password,
+    // database:process.env.database,
     options: {
         trustServerCertificate: true
         // encrypt: true,

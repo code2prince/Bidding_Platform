@@ -4,29 +4,36 @@ import bodyParser from 'body-parser';
 import { Router } from './Routes/router.js';
 import swaggerui from 'swagger-ui-express';
 import fs from 'fs';
-const db=await dbConnect();
-const port=5555;
-const app=express();
+import dotenv from 'dotenv'
 
-const rawData=fs.readFileSync('./swagger-output.json')
-const swaggerDocuments=JSON.parse(rawData)
-app.use('/api-docs',swaggerui.serve,swaggerui.setup(swaggerDocuments))
+import { Rout } from './Authentication/authRoutes.js';
+dotenv.config();
+const db = await dbConnect();
+const port = 5555;
+const app = express();
+
+const rawData = fs.readFileSync('./swagger-output.json')
+const swaggerDocuments = JSON.parse(rawData)
+app.use('/api-docs', swaggerui.serve, swaggerui.setup(swaggerDocuments))
 
 
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/API',Router);
+app.use('/API', Router);
+app.use('/user', Rout);
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
     res.send(
-     `<div>
+        `<div>
      <h1>Home Page All API</h1>
      </div>`
     )
- })
+})
 
-app.listen((port),()=>{
+
+
+app.listen((port), () => {
     console.log(`server is now running on Port: ${port}`);
 })
 export default db;
