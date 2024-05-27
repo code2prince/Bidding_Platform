@@ -137,9 +137,6 @@
                 "Current_Price": {
                   "example": "any"
                 },
-                "Img_Url": {
-                  "example": "any"
-                },
                 "EndTime": {
                   "example": "any"
                 }
@@ -219,6 +216,27 @@
         "parameters": [
           {
             "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/API/items/{itemId}/bids": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "itemId",
             "in": "path",
             "required": true,
             "type": "string"
